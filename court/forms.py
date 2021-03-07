@@ -11,10 +11,10 @@ CHOICES = [
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password1 = forms.CharField(widget=forms.PasswordInput)
-    user_type = forms.CharField(max_length=30, choices=CHOICES)
-    court = forms.CharField(max_length=100, blank=False)
-    district = forms.CharField(max_length=100, blank=False)
-    license_no = forms.CharField(max_length=17, null=False)
+    user_type = forms.ChoiceField(choices=CHOICES)
+    court = forms.CharField(max_length=100, required=True)
+    district = forms.CharField(max_length=100, required=True)
+    license_no = forms.CharField(min_length=15, max_length=17, required=True)
 
     class Meta:
         model = User
