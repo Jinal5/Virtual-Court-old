@@ -11,7 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-<<<<<<< HEAD
 
 class UserFormView(View):
     form_class = UserForm
@@ -89,12 +88,14 @@ class LogoutView(View):
         form = self.form_class(None)
         logout(request)
         return redirect(reverse("music:login_user"))
-=======
+
+
 def home(request):
-    return render(request, 'court/home.html', {'title' : 'Home'} )
+    return render(request, "court/home.html", {"title": "Home"})
+
 
 def about(request):
-    return render(request, 'court/about.html', {'title' : 'About'}) 
+    return render(request, "court/about.html", {"title": "About"})
+
 
 # Create your views here.
->>>>>>> 219a62e680e647545b92c664b20fbf72b66ab7c0
