@@ -34,7 +34,7 @@ class UserFormView(View):
             if password == password1:
                 user.set_password(password)
                 user.save()
-                user = user.objects.get(username=username)
+                user = User.objects.get(username=username)
                 user_profile = UserProfile.objects.get(user=user)
                 user_profile.user_type = user_type
                 user_profile.court = court
@@ -45,7 +45,8 @@ class UserFormView(View):
                 return redirect("court:login")
             else:
                 messages.success(request, "Password does not match")
-        return render(request, self.template_name, {"form": form})
+        else:
+            return render(request, self.template_name, {"form": form})
 
 
 class LoginView(View):
@@ -65,7 +66,7 @@ class LoginView(View):
             if user.is_active:
                 login(request, user)
                 # messages.info(request, 'Your have successfully loged in!')
-                return redirect("music:index")
+                return redirect("court:home")
             else:
                 return render(
                     request,
@@ -82,12 +83,12 @@ class LoginView(View):
 
 class LogoutView(View):
     form_class = LoginForm
-    template_name = "music/login.html"
+    template_name = "court/login.html"
 
     def get(self, request):
         form = self.form_class(None)
         logout(request)
-        return redirect(reverse("music:login_user"))
+        return redirect(reverse("court:login"))
 
 
 def home(request):
