@@ -10,11 +10,19 @@ CHOICES = [
 ]
 
 Court_Type=[
-    ("SUP":"Supreme Court"),
-    ("HIG":"High Court"),
-    ("DST":"District Court"),
-    ("SES":"Session Court"),
+    ("SUP","Supreme Court"),
+    ("HIG","High Court"),
+    ("DST","District Court"),
+    ("SES","Session Court"),
 ]
+
+Case_type=[
+    ("CIV","Civil"),
+    ("CRI","Criminal"),
+]
+def user_directory_path(instance, filename): 
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename> 
+    return 'user_{0}/{1}'.format(instance.user.id, filename) 
 
 class UserProfile(models.Model):
     # required by the auth model
@@ -34,6 +42,16 @@ class Advocate(models.Model):
     address=models.CharField(max_length=500)
     court_type=MultiSelectField(choices=Court_Type,max_length=3)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+class Case(models.Model):
+    advocate=models.ForeignKey(Advocate,on_delete=models.CASCADE,related_name="advocate")
+    name_of_applicant=models.CharField(max_length=400)
+    #phone number
+    address=models.CharField(max_length=500)
+    case_type=models.CharField(max_length=3,choices=Case_type)
+    court_type=models.CharField(choices=Court_Type,max_length=3)
+    subject=models.CharField(max_length=500)
+    affidavit_fileupload = models.FileField(upload_to = user_directory_path) 
 
 
     
