@@ -6,14 +6,20 @@ CHOICES = [
     ("Judge", "Judge"),
     ("Lawyer", "Lawyer"),
 ]
+Court_Type=[
+    ("SUP":"Supreme Court"),
+    ("HIG":"High Court"),
+    ("DST":"District Court"),
+    ("SES":"Session Court"),
+]
 
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password1 = forms.CharField(widget=forms.PasswordInput)
     user_type = forms.ChoiceField(choices=CHOICES)
-    court = forms.CharField(max_length=100, required=True)
-    district = forms.CharField(max_length=100, required=True)
+    court = forms.MultipleChoicefield(max_length=3, choices = Court_Type,required=True)
+    address = forms.CharField(max_length=500, required=True)
     license_no = forms.CharField(min_length=15, max_length=17, required=True)
 
     class Meta:
@@ -27,7 +33,7 @@ class UserForm(forms.ModelForm):
             "last_name",
             "user_type",
             "court",
-            "district",
+            "address",
             "license_no",
         ]
 

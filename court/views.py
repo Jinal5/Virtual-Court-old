@@ -29,23 +29,28 @@ class UserFormView(View):
             password1 = form.cleaned_data["password1"]
             user_type = form.cleaned_data["user_type"]
             court = form.cleaned_data["court"]
-            district = form.cleaned_data["district"]
+            address = form.cleaned_data["address"]
             license_no = form.cleaned_data["license_no"]
+
             if password == password1:
                 user.set_password(password)
                 user.save()
-                user = user.objects.get(username=username)
+                user = User.objects.get(username=username)
                 user_profile = UserProfile.objects.get(user=user)
                 user_profile.user_type = user_type
-                user_profile.court = court
-                user_profile.district = district
-                user_profile.license_no = license_no
                 user_profile.save()
+                advocate_details=Advocate()
+                advocate_details.user=request.user
+                advocate_details.license_no=license_no
+                advocate_details.name=first_name+last_name
+                advocate_details.court_type=court_type
+                advocate_details.address=address
                 messages.success(request, "Account register successfully")
                 return redirect("court:login")
             else:
                 messages.success(request, "Password does not match")
-        return render(request, self.template_name, {"form": form})
+        else:
+            return render(request, self.template_name, {"form": form})
 
 
 class LoginView(View):
@@ -64,8 +69,16 @@ class LoginView(View):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                # messages.info(request, 'Your have successfully loged in!')
-                return redirect("music:index")
+                user_profile=UserProfile.objects.filter(user=request.user)
+                user_type=user_profile.user_type
+                if user_type=="Lawyer":
+                    return redirect("court:advocate")
+                elif user_type=="Judge":
+                    return redirect("court:judge")
+                else:
+                    return redirect("court:login",{"Wrong User Type"})
+
+                # messages.info(request, 'Your have successfully loged in!')git              
             else:
                 return render(
                     request,
