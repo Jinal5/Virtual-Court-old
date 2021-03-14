@@ -95,12 +95,12 @@ class LoginView(View):
 
 class LogoutView(View):
     form_class = LoginForm
-    template_name = "music/login.html"
+    template_name = "court/login.html"
 
     def get(self, request):
         form = self.form_class(None)
         logout(request)
-        return redirect(reverse("music:login_user"))
+        return redirect(reverse("court:login"))
 
 
 def home(request):
