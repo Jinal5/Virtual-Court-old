@@ -40,8 +40,11 @@ class Advocate(models.Model):
     license_no = models.CharField(max_length=17, primary_key=True)
     name=models.CharField(max_length=400)
     address=models.CharField(max_length=500)
-    court_type=MultiSelectField(choices=Court_Type,max_length=3)
+    court_type=MultiSelectField(choices=Court_Type,max_length=20)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Case(models.Model):
     advocate=models.ForeignKey(Advocate,on_delete=models.CASCADE,related_name="advocate")

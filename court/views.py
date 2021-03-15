@@ -45,8 +45,9 @@ class UserFormView(View):
                 advocate_details.user=user
                 advocate_details.license_no=license_no
                 advocate_details.name=first_name+last_name
-                advocate_details.court_type=court_type
+                advocate_details.court_type=court
                 advocate_details.address=address
+                advocate_details.save()
                 messages.success(request, "Account register successfully")
                 return redirect("court:login")
             else:
@@ -71,12 +72,14 @@ class LoginView(View):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                user_profile=UserProfile.objects.filter(user=request.user)
+                user_profile=UserProfile.objects.get(user=request.user)
+                # print(user_profile)
                 user_type=user_profile.user_type
+                # print(user_type)
                 if user_type=="Lawyer":
-                    return redirect("court:advocate")
+                    return render(request, "court/advocate.html")
                 elif user_type=="Judge":
-                    return redirect("court:judge")
+                    return render(request, "court/judge.html")
                 else:
                     return redirect("court:login",{"Wrong User Type"})
 
@@ -94,6 +97,21 @@ class LoginView(View):
                 {"form": form, "error_message": "Invalid login"},
             )
 
+# class JudgeView(View):
+#     form_class = LoginForm
+#     template_name = "court/judge.html"
+
+#     def get(self, request):
+#         form = self.form_class(None)
+#         return render(request, self.template_name, {"form": form})
+
+# class AdvocateView(View):
+#     form_class = LoginForm
+#     template_name = "court/advocate.html"
+
+#     def get(self, request):
+#         form = self.form_class(None)
+#         return render(request, self.template_name, {"form": form})
 
 class LogoutView(View):
     form_class = LoginForm
