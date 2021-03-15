@@ -40,7 +40,7 @@ class UserFormView(View):
                 user_profile.user_type = user_type
                 user_profile.save()
                 advocate_details=Advocate()
-                advocate_details.user=request.user
+                advocate_details.user=user
                 advocate_details.license_no=license_no
                 advocate_details.name=first_name+last_name
                 advocate_details.court_type=court_type
@@ -88,7 +88,7 @@ class LoginView(View):
         else:
             return render(
                 request,
-                "music/login.html",
+                "court/login.html",
                 {"form": form, "error_message": "Invalid login"},
             )
 
