@@ -27,6 +27,8 @@ class UserFormView(View):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             password1 = form.cleaned_data["password1"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
             user_type = form.cleaned_data["user_type"]
             court = form.cleaned_data["court"]
             address = form.cleaned_data["address"]
@@ -40,7 +42,7 @@ class UserFormView(View):
                 user_profile.user_type = user_type
                 user_profile.save()
                 advocate_details=Advocate()
-                advocate_details.user=request.user
+                advocate_details.user=user
                 advocate_details.license_no=license_no
                 advocate_details.name=first_name+last_name
                 advocate_details.court_type=court_type
