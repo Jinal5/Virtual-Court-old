@@ -47,14 +47,14 @@ class Advocate(models.Model):
         return self.name
 
 class Case(models.Model):
-    advocate=models.ForeignKey(Advocate,on_delete=models.CASCADE,related_name="advocate")
+    advocate=models.ForeignKey(User,on_delete=models.CASCADE,related_name="advocate_user")
     name_of_applicant=models.CharField(max_length=400)
-    #phone number
+    phone_number=models.PositiveIntegerField(null=True)
     address=models.CharField(max_length=500)
     case_type=models.CharField(max_length=3,choices=Case_type)
     court_type=models.CharField(choices=Court_Type,max_length=3)
     subject=models.CharField(max_length=500)
-
+    file=models.FileField(upload_to=None, max_length=100, null=True)
 
     
 

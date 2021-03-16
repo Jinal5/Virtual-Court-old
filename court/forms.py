@@ -44,3 +44,19 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["username", "password"]
+
+class CaseForm(forms.ModelForm):
+
+    class Meta:
+        model = Case
+        fields = [
+            "advocate",
+            "name_of_applicant",
+            "phone_number",
+            "address",
+            "case_type",
+            "court_type",
+            "subject",
+            "file"
+        ]
+        exclude = ('advocate',)
