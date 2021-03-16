@@ -122,14 +122,20 @@ class FileCase(LoginRequiredMixin,View):
         return render(request,self.template_name,{'form':form})
 
     def post(self,request):
+        print(5)
         form=self.form_class(request.POST)
+        print(form)
         if form.is_valid():
+            print(1)
             provider=form.save(commit=False)
+            print(2)
             form.instance.advocate = self.request.user
+            print(3)
             provider.save()
+            print(4)    
             return render('court/advocate.html')
-        
-        return render(request,self.template_name,{'form':form})
+        else:
+            return render(request,self.template_name,{'form':form})
 
 class LogoutView(View):
     form_class = LoginForm

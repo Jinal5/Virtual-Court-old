@@ -54,7 +54,7 @@ class Case(models.Model):
     case_type=models.CharField(max_length=3,choices=Case_type)
     court_type=models.CharField(choices=Court_Type,max_length=3)
     subject=models.CharField(max_length=500)
-    file=models.FileField(upload_to=None, max_length=100, null=True)
+    file=models.FileField(upload_to=user_directory_path, max_length=100, null=True)
 
     
 

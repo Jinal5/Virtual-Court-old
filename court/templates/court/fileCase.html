@@ -5,19 +5,19 @@
     <div class="custom-form">
         <form method="POST" action="">
         {% csrf_token%}
-            <label for="username">NAME</label><br>
+            <label for="name_of_applicant">NAME</label><br>
             {{ form.name_of_applicant }}<br>
-            <label for="password">PHONE NUMBER</label><br>
+            <label for="phone_number">PHONE NUMBER</label><br>
             {{ form.phone_number }}<br>
-            <label for="password1">ADDRESS</label><br>
+            <label for="address">ADDRESS</label><br>
             {{ form.address }}<br>
-            <label for="email">CASE TYPE</label><br>
+            <label for="case_type">CASE TYPE</label><br>
             {{ form.case_type }}<br>
-            <label for="first_name">COURT</label><br>
+            <label for="court_type">COURT</label><br>
             {{ form.court_type }}<br>
-            <label for="last_name">SUBJECT</label><br>
+            <label for="subject">SUBJECT</label><br>
             {{ form.subject }}<br>
-            <label for="user_type">FILE</label><br>
+            <label for="file">FILE</label><br>
             {{ form.file }}<br>
     
             <input type="submit" name="Submit" id ="Submit" value="Submit">
