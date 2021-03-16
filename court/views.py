@@ -125,11 +125,14 @@ class FileCase(LoginRequiredMixin,View):
         form=self.form_class(request.POST)
         if form.is_valid():
             provider=form.save(commit=False)
-            form.instance.advocate = self.request.user
-            provider.save()
-            return render('court/advocate.html')
+            phone_number=form.cleaned_data["phone_number"]
+            if phone_number>6000000000 and phone_number<9999999999:
+                form.instance.advocate = self.request.user
+                provider.save()
+                return render(request, 'court/advocate.html')
         
-        return render(request,self.template_name,{'form':form})
+        else:
+            return render(request,self.template_name,{'form':form})
 
 class LogoutView(View):
     form_class = LoginForm
