@@ -122,18 +122,15 @@ class FileCase(LoginRequiredMixin,View):
         return render(request,self.template_name,{'form':form})
 
     def post(self,request):
-        print(5)
         form=self.form_class(request.POST)
-        print(form)
         if form.is_valid():
-            print(1)
             provider=form.save(commit=False)
-            print(2)
-            form.instance.advocate = self.request.user
-            print(3)
-            provider.save()
-            print(4)    
-            return render('court/advocate.html')
+            phone_number=form.cleaned_data["phone_number"]
+            if phone_number>6000000000 and phone_number<9999999999:
+                form.instance.advocate = self.request.user
+                provider.save()
+                return render(request, 'court/advocate.html')
+        
         else:
             return render(request,self.template_name,{'form':form})
 

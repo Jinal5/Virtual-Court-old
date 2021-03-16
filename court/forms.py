@@ -46,7 +46,7 @@ class LoginForm(forms.ModelForm):
         fields = ["username", "password"]
 
 class CaseForm(forms.ModelForm):
-    
+
     class Meta:
         model = Case
         fields = [

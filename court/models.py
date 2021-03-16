@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from multiselectfield import MultiSelectField
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 
 CHOICES = [
     ("Judge", "Judge"),
@@ -49,12 +51,15 @@ class Advocate(models.Model):
 class Case(models.Model):
     advocate=models.ForeignKey(User,on_delete=models.CASCADE,related_name="advocate_user")
     name_of_applicant=models.CharField(max_length=400)
-    phone_number=models.PositiveIntegerField(null=True)
+    phone_number=models.BigIntegerField()
     address=models.CharField(max_length=500)
     case_type=models.CharField(max_length=3,choices=Case_type)
     court_type=models.CharField(choices=Court_Type,max_length=3)
     subject=models.CharField(max_length=500)
-    file=models.FileField(upload_to=user_directory_path, max_length=100, null=True)
+    file=models.FileField(upload_to=user_directory_path, blank=True, null=True)
+
+    def __str__(self):
+        return self.name_of_applicant
 
     
 
