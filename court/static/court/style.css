@@ -153,7 +153,9 @@ fieldset {
 body{
   background-color:#101820FF;
 }
-
+.body2{
+  background-color:rgb(224, 224, 224);
+}
 .navbar .nav {
   font-family: 'Open Sans', sans-serif;
   text-transform: uppercase;
@@ -321,12 +323,11 @@ body{
   .info{
     color: white;
 
-     border-left: double;
   }
 
   .info2{
     color: white;
-background-color: #002200;
+    background-color: #002200;
      border: solid 7px #101820FF;
      border-right: solid #101820FF;;
   }
@@ -500,14 +501,12 @@ background-color: #002200;
 }
 
 .tickerv-wrap {
-
-
     box-sizing: content-box;
     height: 10%;
     overflow: hidden;
     padding: 10px;
     max-width: 500px;
-
+    position: relative;
 }
 
 @keyframes tickerv {
