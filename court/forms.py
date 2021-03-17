@@ -57,6 +57,8 @@ class CaseForm(forms.ModelForm):
             "case_type",
             "court_type",
             "subject",
-            "file"
+            "file",
+            "district",
+            "state"
         ]
-        exclude = ('advocate',)
+        exclude = ('advocate','status','caseID',)

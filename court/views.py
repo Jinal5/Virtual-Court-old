@@ -10,7 +10,11 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib import messages
+import random, string
 
+def generateKey():
+    x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+    return x
 
 class UserFormView(View):
     form_class = UserForm
@@ -128,6 +132,7 @@ class FileCase(LoginRequiredMixin,View):
             phone_number=form.cleaned_data["phone_number"]
             if phone_number>6000000000 and phone_number<9999999999:
                 form.instance.advocate = self.request.user
+                form.instance.caseID=generateKey()
                 provider.save()
                 return render(request, 'court/advocate.html')
         
@@ -151,5 +156,9 @@ def home(request):
 def about(request):
     return render(request, "court/about.html", {"title": "About"})
 
+def status(request):
+    return render(request, "court/status.html")
 
+def feecalc(request):
+    return render(request, "court/feecalc.html", {"title": "Fee Calculator"})
 # Create your views here.

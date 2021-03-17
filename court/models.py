@@ -57,6 +57,10 @@ class Case(models.Model):
     court_type=models.CharField(choices=Court_Type,max_length=3)
     subject=models.CharField(max_length=500)
     file=models.FileField(upload_to=user_directory_path, blank=True, null=True)
+    caseID=models.CharField(max_length=16, unique=True, blank=True,null=True)
+    status=models.BooleanField(default=False)
+    district=models.CharField(max_length=100,blank=True,null=True)
+    state=models.CharField(max_length=100,blank=True,null=True)
 
     def __str__(self):
         return self.name_of_applicant
