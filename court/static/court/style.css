@@ -44,7 +44,7 @@
 }
 
 #casefile {
-  background: #101820FF;
+  background: #398887;
   padding: 25px;
   margin: auto;
   
@@ -106,7 +106,7 @@ fieldset {
   cursor: pointer;
   width: 100%;
   border: none;
-  background: #43A047;
+  background: #4fc4c2;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
@@ -114,7 +114,7 @@ fieldset {
 }
 
 #casefile button[type="submit"]:hover {
-  background: #002200;
+  background: #21657c;
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
@@ -156,7 +156,7 @@ fieldset {
   text-transform: uppercase
 }
 body{
-  background-color:#101820FF;
+  background-color:#204f5e;
 }
 .body2{
   background-color:rgb(224, 224, 224);
@@ -169,7 +169,7 @@ body{
 }
 
 .navbar-inverse {
-  background-color: #002200
+  background-color: #3c7271;
 }
 
 .navbar-inverse .navbar-nav>.active>a:hover,
@@ -189,7 +189,7 @@ body{
 }
 
 .dropdown-menu {
-  background-color: #006B00
+  background-color: #53b0ae
 }
 
 .dropdown-menu>li>a:hover,
@@ -332,16 +332,16 @@ body{
 
   .info2{
     color: white;
-    background-color: #002200;
-     border: solid 7px #101820FF;
-     border-right: solid #101820FF;;
+    background-color: #53B0AE;
+     border: solid 7px #336878;
+     border-right: solid #336878;
   }
 
 
 
   .site-footer
 {
-  background-color:#002200;
+  background-color:#025e5c;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
