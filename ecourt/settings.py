@@ -82,7 +82,7 @@ WSGI_APPLICATION = "ecourt.wsgi.application"
 # }
 DATABASES = {
     "default": {
-    "ENGINE": "django.db.backends.postgresql_psycopg2",
+      "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "ecourt",
         "USER": "postgres",
     "PASSWORD": "Manu#123@",

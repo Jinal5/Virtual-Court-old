@@ -13,7 +13,6 @@ Court_Type=[
     ("SES","Session Court"),
 ]
 
-
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password1 = forms.CharField(widget=forms.PasswordInput)
@@ -59,6 +58,9 @@ class CaseForm(forms.ModelForm):
             "subject",
             "file",
             "district",
-            "state"
+            "state",
+            "name_of_respondent",
+            "lawyer_of_respondent",
+            "address_of_respondent",
         ]
-        exclude = ('advocate','status','caseID',)
+        exclude = ('advocate','status','cnr','fileNo')

@@ -16,6 +16,10 @@ def generateKey():
     x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
     return x
 
+def generateNo():
+    x = ''.join(random.choice(string.digits) for _ in range(8))
+    return x    
+
 class UserFormView(View):
     form_class = UserForm
     template_name = "court/registration_form.html"
@@ -130,13 +134,18 @@ class FileCase(LoginRequiredMixin,View):
         if form.is_valid():
             provider=form.save(commit=False)
             phone_number=form.cleaned_data["phone_number"]
-            if phone_number>6000000000 and phone_number<9999999999:
+            print(1)
+            if phone_number>=6000000000 and phone_number<=9999999999:
                 form.instance.advocate = self.request.user
-                form.instance.caseID=generateKey()
+                form.instance.cnr=generateKey()
+                form.instance.fileNo=generateNo()
+                print(3)
                 provider.save()
                 return render(request, 'court/advocate.html')
+                print(4)
         
         else:
+            print(2)
             return render(request,self.template_name,{'form':form})
 
 class LogoutView(View):

@@ -5,13 +5,25 @@
             {% csrf_token%}
           <h2>File a case:</h2>
           <h4>Please provide the following details:</h4>
-            <label for="name">Name</label>
+            <label for="name">Name of Petitioner</label>
             <fieldset style="color: black;">
                 {{ form.name_of_applicant }}
             </fieldset>
-            <label for="Address">Address </label>
+            <label for="Address">Address of Petitioner</label>
             <fieldset style="color: black;">
                 {{ form.address }}
+            </fieldset>
+            <label for="name">Name of Respondent</label>
+            <fieldset style="color: black;">
+                {{ form.name_of_respondent }}
+            </fieldset>
+            <label for="address">Address of Respondent</label>
+            <fieldset style="color: black;">
+                {{ form.address_of_respondent }}
+            </fieldset>
+            <label for="lawyer">Advocate of Respondent</label>
+            <fieldset style="color: black;">
+                {{ form.lawyer_of_respondent }}
             </fieldset>
             <label for="Subject">Subject</label>
             <fieldset style="color: black;">
