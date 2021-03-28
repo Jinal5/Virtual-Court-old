@@ -10,7 +10,15 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib import messages
+import random, string
 
+def generateKey():
+    x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+    return x
+
+def generateNo():
+    x = ''.join(random.choice(string.digits) for _ in range(8))
+    return x    
 
 class UserFormView(View):
     form_class = UserForm
@@ -27,6 +35,8 @@ class UserFormView(View):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             password1 = form.cleaned_data["password1"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
             user_type = form.cleaned_data["user_type"]
             court = form.cleaned_data["court"]
             address = form.cleaned_data["address"]
@@ -40,11 +50,12 @@ class UserFormView(View):
                 user_profile.user_type = user_type
                 user_profile.save()
                 advocate_details=Advocate()
-                advocate_details.user=request.user
+                advocate_details.user=user
                 advocate_details.license_no=license_no
                 advocate_details.name=first_name+last_name
-                advocate_details.court_type=court_type
+                advocate_details.court_type=court
                 advocate_details.address=address
+                advocate_details.save()
                 messages.success(request, "Account register successfully")
                 return redirect("court:login")
             else:
@@ -69,12 +80,14 @@ class LoginView(View):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                user_profile=UserProfile.objects.filter(user=request.user)
+                user_profile=UserProfile.objects.get(user=request.user)
+                # print(user_profile)
                 user_type=user_profile.user_type
+                # print(user_type)
                 if user_type=="Lawyer":
-                    return redirect("court:advocate")
+                    return render(request, "court/advocate.html")
                 elif user_type=="Judge":
-                    return redirect("court:judge")
+                    return render(request, "court/judge.html")
                 else:
                     return redirect("court:login",{"Wrong User Type"})
 
@@ -88,10 +101,52 @@ class LoginView(View):
         else:
             return render(
                 request,
-                "music/login.html",
+                "court/login.html",
                 {"form": form, "error_message": "Invalid login"},
             )
 
+# class JudgeView(View):
+#     form_class = LoginForm
+#     template_name = "court/judge.html"
+
+#     def get(self, request):
+#         form = self.form_class(None)
+#         return render(request, self.template_name, {"form": form})
+
+# class AdvocateView(View):
+#     form_class = LoginForm
+#     template_name = "court/advocate.html"
+
+#     def get(self, request):
+#         form = self.form_class(None)
+#         return render(request, self.template_name, {"form": form})
+
+class FileCase(LoginRequiredMixin,View):
+    form_class=CaseForm
+    template_name='court/fileCase.html'
+        
+    def get(self,request):
+        form=self.form_class(None)
+        return render(request,self.template_name,{'form':form})
+
+    def post(self,request):
+        form=self.form_class(request.POST)
+        if form.is_valid():
+            provider=form.save(commit=False)
+            phone_number=form.cleaned_data["phone_number"]
+            print(1)
+            if phone_number>=6000000000 and phone_number<=9999999999:
+                form.instance.advocate = self.request.user
+                form.instance.cnr=generateKey()
+                form.instance.fileNo=generateNo()
+                print(3)
+                provider.save()
+                return render(request, 'court/advocate.html')
+                print(4)
+        
+        else:
+            print(2)
+            return render(request,self.template_name,{'form':form})
 
 class LogoutView(View):
     form_class = LoginForm
@@ -110,5 +165,9 @@ def home(request):
 def about(request):
     return render(request, "court/about.html", {"title": "About"})
 
+def status(request):
+    return render(request, "court/status.html")
 
+def feecalc(request):
+    return render(request, "court/feecalc.html", {"title": "Fee Calculator"})
 # Create your views here.

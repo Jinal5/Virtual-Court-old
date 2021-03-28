@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from multiselectfield import MultiSelectField
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 
 CHOICES = [
     ("Judge", "Judge"),
@@ -40,18 +42,32 @@ class Advocate(models.Model):
     license_no = models.CharField(max_length=17, primary_key=True)
     name=models.CharField(max_length=400)
     address=models.CharField(max_length=500)
-    court_type=MultiSelectField(choices=Court_Type,max_length=3)
+    court_type=MultiSelectField(choices=Court_Type,max_length=20)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 class Case(models.Model):
-    advocate=models.ForeignKey(Advocate,on_delete=models.CASCADE,related_name="advocate")
+    advocate=models.ForeignKey(User,on_delete=models.CASCADE,related_name="advocate_user")
     name_of_applicant=models.CharField(max_length=400)
-    #phone number
+    phone_number=models.BigIntegerField()
     address=models.CharField(max_length=500)
     case_type=models.CharField(max_length=3,choices=Case_type)
     court_type=models.CharField(choices=Court_Type,max_length=3)
     subject=models.CharField(max_length=500)
+    file=models.FileField(upload_to=user_directory_path, blank=True, null=True)
+    cnr=models.CharField(max_length=16, unique=True, blank=True,null=True)
+    fileNo=models.CharField(max_length=16, unique=True, blank=True,null=True)
+    status=models.BooleanField(default=False)
+    district=models.CharField(max_length=100,blank=True,null=True)
+    state=models.CharField(max_length=100,blank=True,null=True)
+    name_of_respondent=models.CharField(max_length=400,null=True)
+    lawyer_of_respondent=models.CharField(max_length=400,null=True)
+    address_of_respondent=models.CharField(max_length=500, null=True)
 
+    def __str__(self):
+        return self.cnr
 
     
 
