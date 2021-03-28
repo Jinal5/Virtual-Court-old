@@ -64,3 +64,12 @@ class CaseForm(forms.ModelForm):
             "address_of_respondent",
         ]
         exclude = ('advocate','status','cnr','fileNo')
+
+
+class SearchForm(forms.ModelForm):
+    cnr=forms.CharField(max_length=16, required=True)
+    class Meta:
+        model = Case
+        fields=[
+            "cnr",
+        ]

@@ -157,8 +157,9 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse("court:login"))
 
-class SearchView(ListView)
+class SearchView(ListView):
     template_name = 'court/status.html'
+    context_object_name = "case_details"
     model = Case
 
     def get_queryset(self):
@@ -169,6 +170,19 @@ class SearchView(ListView)
         print(object_list)
         return object_list
 
+# class SearchForm(View):
+#     form_class=SearchForm
+#     template_name='court/search.html'
+    
+#     def get(self,request):
+#         form=self.form_class(None)
+#         return render(request,self.template_name,{'form':form})
+
+#     def post(self,request):
+#         form=self.form_class(request.POST)
+#         if form.is_valid():
+#             cnr=form.cleaned_data["cnr"]
+#             return redirect(reverse("court:status",cnr))
 
 def home(request):
     return render(request, "court/home.html", {"title": "Home"})
@@ -177,8 +191,8 @@ def home(request):
 def about(request):
     return render(request, "court/about.html", {"title": "About"})
 
-def status(request):
-    return render(request, "court/status.html")
+def search(request):
+    return render(request, "court/search.html", {"title": "search"})
 
 def feecalc(request):
     return render(request, "court/feecalc.html", {"title": "Fee Calculator"})

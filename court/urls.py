@@ -13,4 +13,5 @@ urlpatterns = [
     path('fileCase/', views.FileCase.as_view(), name='fileCase'),
     path('feecalc/', views.feecalc, name='feecalc'),
     path('status/<str:cnr>/', views.SearchView.as_view(), name='status'),
+    path('search/', views.search, name='search'),
 ]

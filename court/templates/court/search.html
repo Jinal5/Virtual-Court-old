@@ -1,0 +1,12 @@
+{% extends "court/base.html" %}
+{% block content %}
+<div class="containercasefile casefilediv">
+    <form action="{% url 'court:status' cnr %}"  method="POST">
+        {% csrf_token%}
+        <h2>Search</h2>
+        <label for="cnr">CNR</label><br>
+        <input type="text" placeholder="Search.." name="cnr">
+        <input type="submit" name="Submit" id ="Submit" value="Submit" style="color: black">
+    </form>
+</div>
+{% endblock content %}
