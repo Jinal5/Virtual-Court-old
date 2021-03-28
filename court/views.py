@@ -157,6 +157,18 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse("court:login"))
 
+class SearchView(ListView)
+    template_name = 'court/status.html'
+    model = Case
+
+    def get_queryset(self):
+        cnr = self.kwargs.get('cnr', '')
+        object_list = self.model.objects.all()
+        if cnr:
+            object_list = object_list.filter(cnr__icontains=cnr)
+        print(object_list)
+        return object_list
+
 
 def home(request):
     return render(request, "court/home.html", {"title": "Home"})

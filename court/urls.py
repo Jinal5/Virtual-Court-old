@@ -12,5 +12,5 @@ urlpatterns = [
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('fileCase/', views.FileCase.as_view(), name='fileCase'),
     path('feecalc/', views.feecalc, name='feecalc'),
-    path('status/', views.status, name='status'),
+    path('status/<str:cnr>/', views.SearchView.as_view(), name='status'),
 ]
