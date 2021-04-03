@@ -1,26 +1,56 @@
 {% extends "court/base2.html" %}
 {% block content %}
-    <h1>CaseFile</h1>
-
-    <div class="custom-form">
-        <form method="POST" action="">
-        {% csrf_token%}
-            <label for="name_of_applicant">NAME</label><br>
-            {{ form.name_of_applicant }}<br>
-            <label for="phone_number">PHONE NUMBER</label><br>
-            {{ form.phone_number }}<br>
-            <label for="address">ADDRESS</label><br>
-            {{ form.address }}<br>
-            <label for="case_type">CASE TYPE</label><br>
-            {{ form.case_type }}<br>
-            <label for="court_type">COURT</label><br>
-            {{ form.court_type }}<br>
-            <label for="subject">SUBJECT</label><br>
-            {{ form.subject }}<br>
-            <label for="file">FILE</label><br> 
-            {{ form.file }}<br> 
-    
-            <input type="submit" name="Submit" id ="Submit" value="Submit">
+    <div class="containercasefile casefilediv">
+        <form id="casefile" action="" method="post">
+            {% csrf_token%}
+          <h2>File a case:</h2>
+          <h4>Please provide the following details:</h4>
+            <label for="name">Name of Petitioner</label>
+            <fieldset style="color: black;">
+                {{ form.name_of_applicant }}
+            </fieldset>
+            <label for="Address">Address of Petitioner</label>
+            <fieldset style="color: black;">
+                {{ form.address }}
+            </fieldset>
+            <label for="name">Name of Respondent</label>
+            <fieldset style="color: black;">
+                {{ form.name_of_respondent }}
+            </fieldset>
+            <label for="address">Address of Respondent</label>
+            <fieldset style="color: black;">
+                {{ form.address_of_respondent }}
+            </fieldset>
+            <label for="lawyer">Advocate of Respondent</label>
+            <fieldset style="color: black;">
+                {{ form.lawyer_of_respondent }}
+            </fieldset>
+            <label for="Subject">Subject</label>
+            <fieldset style="color: black;">
+                {{ form.subject }}
+            </fieldset>
+            <label for="phone_number">Phone No. </label>
+            <fieldset style="color: black;">
+                {{ form.phone_number }}
+            </fieldset>
+            <label for="CaseType">Case Type: </label>
+            <div style="color: black;" >{{form.case_type}}</div>
+            <label for="CaseType">Court Type: </label>
+            <div style="color: black;">{{ form.court_type }}<br></div>
+            <label for="district">District </label>
+            <fieldset style="color: black;">
+                {{ form.district }}
+            </fieldset>
+            <label for="state">State </label>
+            <fieldset style="color: black;">
+                {{ form.state }}
+            </fieldset>
+            <label for="myfile">Select files: </label>
+            {{ form.file }}<br>
+            <fieldset>
+                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+            </fieldset>
+        
         </form>
-  </div>
+      </div>
 {% endblock content %}

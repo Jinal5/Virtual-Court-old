@@ -21,6 +21,9 @@
   line-height: 30px;
   color: white;
   background: #4CAF50;
+  position: relative;
+  margin: auto;
+  
 }
 
 .containercasefile {
@@ -28,6 +31,7 @@
   width: 100%;
   margin:  auto;
   position: relative;
+  margin-left:35%;
 }
 
 #casefile input[type="text"],
@@ -40,13 +44,14 @@
 }
 
 #casefile {
-  background: #101820FF;
+  background: #398887;
   padding: 25px;
-  margin: 80px 0;
+  margin: auto;
+  
   box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.2), 0 10px 15px 0 rgba(0, 0, 0, 0.24);
 }
 
-#casefile h3 {
+#casefile h2 {
   display: block;
   font-size: 30px;
   font-weight: 300;
@@ -101,7 +106,7 @@ fieldset {
   cursor: pointer;
   width: 100%;
   border: none;
-  background: #43A047;
+  background: #4fc4c2;
   color: #FFF;
   margin: 0 0 5px;
   padding: 10px;
@@ -109,7 +114,7 @@ fieldset {
 }
 
 #casefile button[type="submit"]:hover {
-  background: #002200;
+  background: #21657c;
   -webkit-transition: background 0.3s ease-in-out;
   -moz-transition: background 0.3s ease-in-out;
   transition: background-color 0.3s ease-in-out;
@@ -145,15 +150,16 @@ fieldset {
   color: #888;
 }
 
-
 .navbar-brand {
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase
 }
 body{
-  background-color:#101820FF;
+  background-color:#204f5e;
 }
-
+.body2{
+  background-color:rgb(238, 238, 238);
+}
 .navbar .nav {
   font-family: 'Open Sans', sans-serif;
   text-transform: uppercase;
@@ -162,13 +168,13 @@ body{
 }
 
 .navbar-inverse {
-  background-color: #002200
+  background-color: #3c7271;
 }
 
 .navbar-inverse .navbar-nav>.active>a:hover,
 .navbar-inverse .navbar-nav>li>a:hover,
 .navbar-inverse .navbar-nav>li>a:focus {
-  background-color: #002200
+  background-color: #025f5e
 }
 
 .navbar-inverse .navbar-nav>.active>a,
@@ -178,16 +184,16 @@ body{
 .navbar-inverse .navbar-nav>.open>a,
 .navbar-inverse .navbar-nav>.open>a:hover,
 .navbar-inverse .navbar-nav>.open>a:focus {
-  background-color: #002200
+  background-color: #025f5e
 }
 
 .dropdown-menu {
-  background-color: #006B00
+  background-color: #53b0ae
 }
 
 .dropdown-menu>li>a:hover,
 .dropdown-menu>li>a:focus {
-  background-color: #002200
+  background-color: #025f5e
 }
 
 .navbar-inverse {
@@ -200,7 +206,7 @@ body{
 }
 
 .navbar-inverse {
-  border-color: #002200
+  border-color: #3c7271
 }
 
 .navbar-inverse .navbar-brand {
@@ -321,21 +327,20 @@ body{
   .info{
     color: white;
 
-     border-left: double;
   }
 
   .info2{
     color: white;
-background-color: #002200;
-     border: solid 7px #101820FF;
-     border-right: solid #101820FF;;
+    background-color: #53B0AE;
+     border: solid 7px #336878;
+     border-right: solid #336878;
   }
 
 
 
   .site-footer
 {
-  background-color:#002200;
+  background-color:#025e5c;
   padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
@@ -500,14 +505,12 @@ background-color: #002200;
 }
 
 .tickerv-wrap {
-
-
     box-sizing: content-box;
     height: 10%;
     overflow: hidden;
     padding: 10px;
     max-width: 500px;
-
+    position: relative;
 }
 
 @keyframes tickerv {
@@ -546,6 +549,6 @@ background-color: #002200;
     line-height: 26px;
 }
 
-.fix{
-
+.carousel-caption{
+  background-color: rgba(0, 0, 0, 0.35);
 }

@@ -13,7 +13,6 @@ Court_Type=[
     ("SES","Session Court"),
 ]
 
-
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
@@ -57,8 +56,14 @@ class CaseForm(forms.ModelForm):
             "case_type",
             "court_type",
             "subject",
-            "file"
+            "file",
+            "district",
+            "state",
+            "name_of_respondent",
+            "lawyer_of_respondent",
+            "address_of_respondent",
         ]
+<<<<<<< HEAD
         exclude = ('advocate',)
 
 
@@ -96,3 +101,15 @@ class LoginnForm(MultipleForm):
         fields = ["username", "password"]
 
     
+=======
+        exclude = ('advocate','status','cnr','fileNo')
+
+
+class SearchForm(forms.ModelForm):
+    cnr=forms.CharField(max_length=16, required=True)
+    class Meta:
+        model = Case
+        fields=[
+            "cnr",
+        ]
+>>>>>>> ac1d9b3525e73fee3e7e85bb8cbff14e0b74e40f

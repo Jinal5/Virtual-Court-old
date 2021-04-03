@@ -11,7 +11,15 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib import messages
+import random, string
 
+def generateKey():
+    x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+    return x
+
+def generateNo():
+    x = ''.join(random.choice(string.digits) for _ in range(8))
+    return x    
 
 class UserFormView(View):
     form_class = UserForm
@@ -159,12 +167,18 @@ class FileCase(LoginRequiredMixin,View):
         if form.is_valid():
             provider=form.save(commit=False)
             phone_number=form.cleaned_data["phone_number"]
-            if phone_number>6000000000 and phone_number<9999999999:
+            print(1)
+            if phone_number>=6000000000 and phone_number<=9999999999:
                 form.instance.advocate = self.request.user
+                form.instance.cnr=generateKey()
+                form.instance.fileNo=generateNo()
+                print(3)
                 provider.save()
                 return render(request, 'court/advocate.html')
+                print(4)
         
         else:
+            print(2)
             return render(request,self.template_name,{'form':form})
 
 class LogoutView(View):
@@ -176,6 +190,32 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse("court:login"))
 
+class SearchView(ListView):
+    template_name = 'court/status.html'
+    context_object_name = "case_details"
+    model = Case
+
+    def get_queryset(self):
+        cnr = self.kwargs.get('cnr', '')
+        object_list = self.model.objects.all()
+        if cnr:
+            object_list = object_list.filter(cnr__icontains=cnr)
+        print(object_list)
+        return object_list
+
+# class SearchForm(View):
+#     form_class=SearchForm
+#     template_name='court/search.html'
+    
+#     def get(self,request):
+#         form=self.form_class(None)
+#         return render(request,self.template_name,{'form':form})
+
+#     def post(self,request):
+#         form=self.form_class(request.POST)
+#         if form.is_valid():
+#             cnr=form.cleaned_data["cnr"]
+#             return redirect(reverse("court:status",cnr))
 
 def home(request):
     return render(request, "court/home.html", {"title": "Home"})
@@ -184,5 +224,9 @@ def home(request):
 def about(request):
     return render(request, "court/about.html", {"title": "About"})
 
+def search(request):
+    return render(request, "court/search.html", {"title": "search"})
 
+def feecalc(request):
+    return render(request, "court/feecalc.html", {"title": "Fee Calculator"})
 # Create your views here.
