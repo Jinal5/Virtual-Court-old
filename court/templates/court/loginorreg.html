@@ -1,0 +1,159 @@
+{% extends "court/base.html" %}
+{% block content %}      
+            <br/><br/>
+            <div class="tabs">
+            <div class="tab-button-outer">
+                <ul id="tab-button">
+                <li><a href="#tab01" id="on_login" onclick="login()">Log In</a></li>
+                <li><a href="#tab02" onclick="register()">Register</a></li>
+
+                </ul>
+            </div>
+            <div class="tab-select-outer">
+                <select id="tab-select">
+                <option value="#tab01">Log In</option>
+                <option value="#tab02">Register</option>
+
+                </select>
+            </div>
+
+            <div class="form">
+            <div id="tab01" class="tab-contents fform">
+                <form id="login" class="input-field" method="POST" action=""><br>
+                    {% csrf_token%}
+                        <label for="username"> &ensp;User ID</label>
+                        <fieldset style="color: black;">
+                            &ensp;{{ form.username }}<br>
+                        </fieldset>
+                        <label for="password" > &ensp;Password</label>
+                        <fieldset style="color: black;">
+                            &ensp;{{ form.password}}<br>
+                        </fieldset>
+                        <br>
+                        
+                        <label for="User"> &ensp;User Type</label>
+                        <select name="User" style="min-width:140px; color: black;">
+                        <option value="o1">&ensp;&ensp;&ensp;Select&ensp;&ensp;</option>    
+                        <option value="o2">&ensp;&ensp;&ensp;Judge&ensp;&ensp;</option>
+                        <option value="o3">&ensp;&ensp;&ensp;Lawyer&ensp;&ensp;</option>
+                        </select><br>
+                        <br><br>
+
+                <div class="loginbutton">
+                <button type="submit" value="LogIn" class="vertical-center">Log In</button>
+                </div>
+
+                </form>
+                </div>
+
+            <div id="tab02" class="tab-contents fform ">
+                <form id="register" class="input-group input-field" method="POST" action="">
+                    {% csrf_token%}
+                <div class="space">  
+                <label for="UserID"> &ensp; User ID</label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.username }}
+                </fieldset>
+                </div>
+                <br>
+                <div class="space">
+                <label for="Password">&ensp; Password</label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.password}}<br>
+                </fieldset>
+                <br>
+                <label for="Confirm">&ensp; Confirm</label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.password1}}<br>
+                </fieldset>
+                </div>
+                &ensp;<input type="checkbox" class="check-box"><span>&ensp;Remember Password</span><br>
+                <br>
+                <div class="space">
+                <label for="Email"> &ensp; E-mail</label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.email}}<br> 
+                </fieldset>
+                </div>
+                <br>
+                <div class="space">
+                <label for="FirstName"> &ensp; First Name</label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.first_name}}<br>
+                </fieldset>
+                <br>
+                <label for="LastName"> &ensp; Last Name</label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.last_name}}<br>
+                </fieldset>
+                </div>
+                
+                <div class="space"><br>
+                <label for="User">&ensp;Choose User Type:   &ensp; </label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.user_type}}<br>
+                </fieldset>
+                </div>
+                <br>
+                
+                <label for="CaseType"> &ensp;Choose Court Type:</label>
+                <fieldset style="color: white;">
+                    {{ form1.court }}
+                </fieldset>
+                
+                <label for="bar">&ensp;Bar ID</label>
+                <fieldset style="color: black;">
+                    &ensp;{{ form1.license_no}}<br><br>
+                </fieldset>
+                
+
+                <!--<div class="space">
+                    <label for="contact">&ensp;Phone number</label>
+                    {{ form.contact_number}}<br>
+                    <input type="tel" class="input-field" name="contact" placeholder="Enter Contact No." required style="color:black"><br>
+                </div> -->
+
+                <div class="space">
+                <button type="submit" value="Register" class="submit-btn">Register</button>
+                <!--<input type="submit" name="Submit" id ="Submit" value="Submit"> -->
+            </div>
+                </form>
+            </div>
+            </div>
+
+            </div>
+{% endblock content %}
+
+{% block jsscript %}
+<script>
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("btn");
+
+    function register(){
+    document.getElementById("tab-select").style.color = "darkgreen";
+    var x = document.getElementById('register');
+    var y = document.getElementById('login');
+if (x.style.visibility === 'visible') {
+x.style.visibility = 'hidden';
+y.style.visibility = 'visible';
+} else {
+x.style.visibility = 'visible';
+    y.style.visibility = 'hidden';
+}
+    }
+
+    function login(){
+    document.getElementById("on_login").style.color = "darkgreen";
+    var x = document.getElementById('login');
+        var y = document.getElementById('register');
+if (x.style.visibility === 'visible') {
+x.style.visibility = 'hidden';
+y.style.visibility = 'visible';
+} else {
+x.style.visibility = 'visible';
+    y.style.visibility = 'hidden';
+}
+    }
+</script>
+{% endblock jsscript %}

@@ -5,7 +5,7 @@
 </div>
 
 <div class="custom-form">
-      <form method="POST" action="">
+     <form method="POST" action="">
       {% csrf_token%}
           <label for="username">USERNAME</label><br>
           {{ form.username }}<br>
@@ -27,7 +27,9 @@
           {{ form.address }}<br>
           <label for="license_no">LICENSE NUMBER</label><br>
           {{ form.license_no}}<br>
+          <!--<label for="contact_number">CONTACT NUMBER</label><br>
+          {{ form1.contact_number}}<br>-->
           <input type="submit" name="Submit" id ="Submit" value="Submit">
-      </form>
+      </form>   
 </div>
 {% endblock content %}

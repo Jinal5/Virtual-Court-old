@@ -15,12 +15,12 @@ Court_Type=[
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    password1 = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
     user_type = forms.ChoiceField(choices=CHOICES)
     court = forms.MultipleChoiceField(choices = Court_Type,required=True,widget=forms.CheckboxSelectMultiple)
     address = forms.CharField(max_length=500, required=True)
-    license_no = forms.CharField(min_length=15, max_length=17, required=True)
+    license_no = forms.CharField(min_length=15, max_length=17, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter Bar ID'}))
 
     class Meta:
         model = User
@@ -39,7 +39,7 @@ class UserForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
 
     class Meta:
         model = User
@@ -60,3 +60,39 @@ class CaseForm(forms.ModelForm):
             "file"
         ]
         exclude = ('advocate',)
+
+
+class MultipleForm(forms.ModelForm):
+    action = forms.CharField(max_length=60, widget=forms.HiddenInput())
+
+class UsernForm(MultipleForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
+    user_type = forms.ChoiceField(choices=CHOICES)
+    court = forms.MultipleChoiceField(choices = Court_Type,required=True,widget=forms.CheckboxSelectMultiple)
+    address = forms.CharField(max_length=500, required=True)
+    license_no = forms.CharField(min_length=15, max_length=17, required=True, widget=forms.TextInput(attrs={'placeholder': 'Enter Bar ID'}))
+
+    class Meta:
+        model = User
+        fields = [
+            "username",
+            "password",
+            "password1",
+            "email",
+            "first_name",
+            "last_name",
+            "user_type",
+            "court",
+            "address",
+            "license_no",
+        ]
+
+class LoginnForm(MultipleForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
+
+    class Meta:
+        model = User
+        fields = ["username", "password"]
+
+    

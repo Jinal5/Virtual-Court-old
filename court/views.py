@@ -6,6 +6,7 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
+from .multiforms import MultiFormsView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -33,6 +34,7 @@ class UserFormView(View):
             court = form.cleaned_data["court"]
             address = form.cleaned_data["address"]
             license_no = form.cleaned_data["license_no"]
+            #contact_number = form.cleaned_data["contact_number"]
 
             if password == password1:
                 user.set_password(password)
@@ -47,6 +49,7 @@ class UserFormView(View):
                 advocate_details.name=first_name+last_name
                 advocate_details.court_type=court
                 advocate_details.address=address
+                #advocate_details.contact_number=contact_number
                 advocate_details.save()
                 messages.success(request, "Account register successfully")
                 return redirect("court:login")
@@ -54,6 +57,7 @@ class UserFormView(View):
                 messages.success(request, "Password does not match")
         else:
             return render(request, self.template_name, {"form": form})
+    
 
 
 class LoginView(View):
@@ -112,6 +116,35 @@ class LoginView(View):
 #     def get(self, request):
 #         form = self.form_class(None)
 #         return render(request, self.template_name, {"form": form})
+
+class TestView(FormView):
+    template_name = 'loginorreg.html'
+    def get(self, request, *args, **kwargs):
+        register_form = UserForm()
+        register_form.prefix = 'register_form'
+        login_form = LoginForm()
+        login_form.prefix = 'login_form'
+        # Use RequestContext instead of render_to_response from 3.0
+        return self.render_to_response(self.get_context_data('register_form':contact_form, 'login_form':social_form ))
+
+    def post(self, request, *args, **kwargs):
+        register_form = UserForm(self.request.POST, prefix='register_form')
+        login_form = LoginForm(self.request.POST, prefix='login_form ')
+
+        if register_form.is_valid() and login_form.is_valid():
+            ### do something
+            print "DONE"
+            return HttpResponseRedirect("court:login",{"Wrong User Type"})
+        else:
+            return self.form_invalid(register_form,login_form , **kwargs)
+
+
+    def form_invalid(self, register_form, login_form, **kwargs):
+        register_form.prefix='register_form'
+        login_form.prefix='login_form'
+                return self.render_to_response(self.get_context_data('register_form':register_form, 'login_form':login_form ))
+
+
 
 class FileCase(LoginRequiredMixin,View):
     form_class=CaseForm

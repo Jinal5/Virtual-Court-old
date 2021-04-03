@@ -43,6 +43,7 @@ class Advocate(models.Model):
     name=models.CharField(max_length=400)
     address=models.CharField(max_length=500)
     court_type=MultiSelectField(choices=Court_Type,max_length=20)
+    #contact_number=models.BigIntegerField(null=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
