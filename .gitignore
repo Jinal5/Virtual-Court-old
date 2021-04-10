@@ -144,3 +144,4 @@ cython_debug/
 !**/migrations/__init__.py
 
 .idea
+.pyc

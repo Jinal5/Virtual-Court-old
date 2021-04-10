@@ -6,12 +6,19 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
+<<<<<<< HEAD
 from .multiforms import MultiFormsView
+=======
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib import messages
 import random, string
+<<<<<<< HEAD
+=======
+from court.utils import get_judge
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 
 def generateKey():
     x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
@@ -42,6 +49,7 @@ class UserFormView(View):
             court = form.cleaned_data["court"]
             address = form.cleaned_data["address"]
             license_no = form.cleaned_data["license_no"]
+<<<<<<< HEAD
             #contact_number = form.cleaned_data["contact_number"]
 
             if password == password1:
@@ -61,11 +69,52 @@ class UserFormView(View):
                 advocate_details.save()
                 messages.success(request, "Account register successfully")
                 return redirect("court:login")
+=======
+
+            if password == password1:
+                if user_type=="Lawyer":
+                    user.set_password(password)
+                    user.save()
+                    user = User.objects.get(username=username)
+                    user_profile = UserProfile.objects.get(user=user)
+                    user_profile.user_type = user_type
+                    user_profile.save()
+                    advocate_details=Advocate()
+                    advocate_details.user=user
+                    advocate_details.license_no=license_no
+                    advocate_details.name=first_name+last_name
+                    advocate_details.court_type=court
+                    advocate_details.address=address
+                    advocate_details.save()
+                    messages.success(request, "Account register successfully")
+                    return redirect("court:login")
+                elif user_type=="Judge":
+                    user.set_password(password)
+                    user.save()
+                    user = User.objects.get(username=username)
+                    user_profile = UserProfile.objects.get(user=user)
+                    user_profile.user_type = user_type
+                    user_profile.save()
+                    judge_details=Judge()
+                    judge_details.user=user
+                    judge_details.license_no=license_no
+                    judge_details.name=first_name+last_name
+                    judge_details.court_type=court
+                    judge_details.address=address
+                    judge_details.save()
+                    messages.success(request, "Account register successfully")
+                    return redirect("court:login")
+                else: 
+                    messages.success(request, "Wrong user type")
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
             else:
                 messages.success(request, "Password does not match")
         else:
             return render(request, self.template_name, {"form": form})
+<<<<<<< HEAD
     
+=======
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 
 
 class LoginView(View):
@@ -125,6 +174,7 @@ class LoginView(View):
 #         form = self.form_class(None)
 #         return render(request, self.template_name, {"form": form})
 
+<<<<<<< HEAD
 class TestView(FormView):
     form_class1 = UsernForm
     form_class2 = LoginnForm
@@ -247,6 +297,8 @@ class LogFormView(View):
             return redirect("court:login_register")
 
 
+=======
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 class FileCase(LoginRequiredMixin,View):
     form_class=CaseForm
     template_name='court/fileCase.html'
@@ -260,11 +312,15 @@ class FileCase(LoginRequiredMixin,View):
         if form.is_valid():
             provider=form.save(commit=False)
             phone_number=form.cleaned_data["phone_number"]
+<<<<<<< HEAD
             print(1)
+=======
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
             if phone_number>=6000000000 and phone_number<=9999999999:
                 form.instance.advocate = self.request.user
                 form.instance.cnr=generateKey()
                 form.instance.fileNo=generateNo()
+<<<<<<< HEAD
                 print(3)
                 provider.save()
                 return render(request, 'court/advocate.html')
@@ -272,6 +328,15 @@ class FileCase(LoginRequiredMixin,View):
         
         else:
             print(2)
+=======
+                print(form.instance.court_type)
+                print(form.instance.district)
+                form.instance.judge=get_judge(form.instance.court_type,form.instance.district)
+                provider.save()
+                return render(request, 'court/advocate.html')
+        
+        else:
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
             return render(request,self.template_name,{'form':form})
 
 class LogoutView(View):
@@ -283,18 +348,45 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse("court:login"))
 
+<<<<<<< HEAD
+=======
+# class SearchView(ListView):
+#     template_name = 'court/status.html'
+#     context_object_name = "case_details"
+#     model = Case
+
+#     def get_queryset(self):
+#         cnr = self.kwargs.get('cnr', '')
+#         object_list = self.model.objects.all()
+#         if cnr:
+#             object_list = object_list.filter(cnr__icontains=cnr)
+#         print(object_list)
+#         return object_list
+
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 class SearchView(ListView):
     template_name = 'court/status.html'
     context_object_name = "case_details"
     model = Case
 
     def get_queryset(self):
+<<<<<<< HEAD
         cnr = self.kwargs.get('cnr', '')
         object_list = self.model.objects.all()
         if cnr:
             object_list = object_list.filter(cnr__icontains=cnr)
         print(object_list)
         return object_list
+=======
+       result = super(SearchView, self).get_queryset()
+       query = self.request.GET.get('search')
+       if query:
+          postresult = Case.objects.filter(cnr__icontains=query)
+          result = postresult
+       else:
+           result = None
+       return result
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 
 # class SearchForm(View):
 #     form_class=SearchForm
@@ -322,6 +414,7 @@ def search(request):
 
 def feecalc(request):
     return render(request, "court/feecalc.html", {"title": "Fee Calculator"})
+<<<<<<< HEAD
 
 class FeesFormView(View):
     form_class = FeesForm
@@ -371,4 +464,6 @@ class FeesFormView(View):
         else:
             return render(request, self.template_name, {"form": form})
 
+=======
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 # Create your views here.
