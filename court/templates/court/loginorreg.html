@@ -19,15 +19,15 @@
 
             <div class="form">
             <div id="tab01" class="tab-contents fform">
-                <form id="login" class="input-field" method="POST" action=""><br>
+                <form id="login" class="input-field" method="POST" action="http://127.0.0.1:8000/loginregister/#tab01"><br>
                     {% csrf_token%}
                         <label for="username"> &ensp;User ID</label>
                         <fieldset style="color: black;">
-                            &ensp;{{ form.username }}<br>
+                            &ensp;{{ login_form.username }}<br>
                         </fieldset>
                         <label for="password" > &ensp;Password</label>
                         <fieldset style="color: black;">
-                            &ensp;{{ form.password}}<br>
+                            &ensp;{{ login_form.password}}<br>
                         </fieldset>
                         <br>
                         
@@ -47,24 +47,24 @@
                 </div>
 
             <div id="tab02" class="tab-contents fform ">
-                <form id="register" class="input-group input-field" method="POST" action="">
+                <form id="register" class="input-group input-field" method="POST" action="http://127.0.0.1:8000/loginregister/#tab02">
                     {% csrf_token%}
                 <div class="space">  
                 <label for="UserID"> &ensp; User ID</label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.username }}
+                    &ensp;{{ register_form.username }}
                 </fieldset>
                 </div>
                 <br>
                 <div class="space">
                 <label for="Password">&ensp; Password</label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.password}}<br>
+                    &ensp;{{ register_form.password}}<br>
                 </fieldset>
                 <br>
                 <label for="Confirm">&ensp; Confirm</label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.password1}}<br>
+                    &ensp;{{ register_form.password1}}<br>
                 </fieldset>
                 </div>
                 &ensp;<input type="checkbox" class="check-box"><span>&ensp;Remember Password</span><br>
@@ -72,38 +72,38 @@
                 <div class="space">
                 <label for="Email"> &ensp; E-mail</label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.email}}<br> 
+                    &ensp;{{ register_form.email}}<br> 
                 </fieldset>
                 </div>
                 <br>
                 <div class="space">
                 <label for="FirstName"> &ensp; First Name</label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.first_name}}<br>
+                    &ensp;{{ register_form.first_name}}<br>
                 </fieldset>
                 <br>
                 <label for="LastName"> &ensp; Last Name</label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.last_name}}<br>
+                    &ensp;{{ register_form.last_name}}<br>
                 </fieldset>
                 </div>
                 
                 <div class="space"><br>
                 <label for="User">&ensp;Choose User Type:   &ensp; </label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.user_type}}<br>
+                    &ensp;{{ register_form.user_type}}<br>
                 </fieldset>
                 </div>
                 <br>
                 
                 <label for="CaseType"> &ensp;Choose Court Type:</label>
                 <fieldset style="color: white;">
-                    {{ form1.court }}
+                    {{ register_form.court }}
                 </fieldset>
                 
                 <label for="bar">&ensp;Bar ID</label>
                 <fieldset style="color: black;">
-                    &ensp;{{ form1.license_no}}<br><br>
+                    &ensp;{{ register_form.license_no}}<br><br>
                 </fieldset>
                 
 

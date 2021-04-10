@@ -63,7 +63,6 @@ class CaseForm(forms.ModelForm):
             "lawyer_of_respondent",
             "address_of_respondent",
         ]
-<<<<<<< HEAD
         exclude = ('advocate',)
 
 
@@ -101,7 +100,6 @@ class LoginnForm(MultipleForm):
         fields = ["username", "password"]
 
     
-=======
         exclude = ('advocate','status','cnr','fileNo')
 
 
@@ -112,4 +110,9 @@ class SearchForm(forms.ModelForm):
         fields=[
             "cnr",
         ]
->>>>>>> ac1d9b3525e73fee3e7e85bb8cbff14e0b74e40f
+
+class FeesForm(forms.Form):
+    court = forms.CharField(max_length=50)
+    case = forms.CharField(max_length=50)
+    subtype = forms.CharField(max_length=50)
+
