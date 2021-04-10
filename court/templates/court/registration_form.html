@@ -5,6 +5,27 @@
         {% csrf_token%}
         <h2>Registration</h2>
         <label for="username">USERNAME</label><br>
+<<<<<<< HEAD
+        {{ form.username }}<br>
+        <label for="password">PASSWORD</label><br>
+        {{ form.password}}<br>
+        <label for="password1">CONFIRM PASSWORD</label><br>
+        {{ form.password1}}<br>
+        <label for="email">EMAIL</label><br>
+        {{ form.email}}<br>
+        <label for="first_name">FIRST NAME</label><br>
+        {{ form.first_name}}<br>
+        <label for="last_name">LAST NAME</label><br>
+        {{ form.last_name}}<br>
+        <label for="user_type">USER TYPE</label><br>
+        {{ form.user_type}}<br>
+        <label for="court">COURT</label><br>
+        {{ form.court }}<br>
+        <label for="district">DISTRICT</label><br>
+        {{ form.address }}<br>
+        <label for="license_no">LICENSE NUMBER</label><br>
+        {{ form.license_no}}<br>
+=======
         <fieldset style="color: black;">{{ form.username }}</fieldset>
         
         <label for="password">PASSWORD</label><br>
@@ -32,6 +53,7 @@
         <label for="license_no">LICENSE NUMBER</label>
         <fieldset style="color: black;">{{ form.license_no}}</fieldset>
         
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
         <input type="submit" name="Submit" id="Submit" value="Submit" style="color: black">
 
     </form>

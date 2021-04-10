@@ -163,7 +163,7 @@ class FileCase(LoginRequiredMixin,View):
                 form.instance.judge=get_judge(form.instance.court_type,form.instance.district)
                 provider.save()
                 return render(request, 'court/advocate.html')
-        
+            
         else:
             return render(request,self.template_name,{'form':form})
 
@@ -230,4 +230,54 @@ def search(request):
 
 def feecalc(request):
     return render(request, "court/feecalc.html", {"title": "Fee Calculator"})
+
+class FeesFormView(View):
+    form_class = FeesForm
+    template_name = "court/feecalc.html"
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            court = request.POST['court']
+            case = request.POST['case']
+            subtype = request.POST['subtype']
+            CourtType = {
+                'Supreme court' : 500,
+                'High court' : 300,
+                'District court' : 200,
+                'Sessions court' : 100
+            }
+            CaseType = {
+                'Civil' : 200,
+                'Criminal' : 400
+            }
+            CaseSubtype = {
+                'Arbitration Cases' : 150,
+                'Rent Petitions' : 50,
+                'Recovery Suits' : 100,
+                'Civil Appeals' : 200,
+                'Transfer Applications' : 75,
+                'Bail Applications' : 100,
+                'Criminal Appeals' : 250,
+                'Criminal Revision Cases' : 80,
+                'Maintenance Cases' : 90,
+                'Miscellaneous Applications' : 100
+            }
+            fees = CourtType[court] + CaseType[case] + CaseSubtype[subtype]
+            results = {
+                'fees' : fees,
+                'court' : court,
+                'case' : case,
+                'subtype' : subtype
+            }
+            return render(request, "court/fees.html", results)
+
+        else:
+            return render(request, self.template_name, {"form": form})
+
+
 # Create your views here.

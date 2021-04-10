@@ -63,6 +63,7 @@ class CaseForm(forms.ModelForm):
             "lawyer_of_respondent",
             "address_of_respondent",
         ]
+       
         exclude = ('advocate','status','cnr','fileNo','judge')
 
 
@@ -73,3 +74,8 @@ class SearchForm(forms.ModelForm):
         fields=[
             "cnr",
         ]
+
+class FeesForm(forms.Form):
+    court = forms.CharField(max_length=50)
+    case = forms.CharField(max_length=50)
+    subtype = forms.CharField(max_length=50)

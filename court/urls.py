@@ -11,7 +11,8 @@ urlpatterns = [
     # path('advocate/', views.AdvocateView.as_view(), name='advocate'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('fileCase/', views.FileCase.as_view(), name='fileCase'),
-    path('feecalc/', views.feecalc, name='feecalc'),
+    path('feecalc/', views.FeesFormView.as_view(), name='feecalc'),
+    path('search/', views.search, name='search'),
     path('status/', views.SearchView.as_view(), name='status'),
     # path('search/', views.search, name='search'),
 ]

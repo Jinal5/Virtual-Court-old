@@ -82,7 +82,7 @@ WSGI_APPLICATION = "ecourt.wsgi.application"
 # }
 DATABASES = {
     "default": {
-      "ENGINE": "django.db.backends.postgresql_psycopg2",
+    "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "ecourt",
         "USER": "postgres",
     "PASSWORD": "Manu#123@",
@@ -131,5 +131,5 @@ USE_TZ = True
 STATIC_URL = "/static/"
 import os
 
-MEDIA_URL = '/media/'
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

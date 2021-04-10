@@ -1,5 +1,47 @@
 {% extends "court/base.html" %}
 {% block content %}
+<<<<<<< HEAD
+    <h1>Check Status</h1>
+    <table class="table" align="center">
+        <thead>
+        <tr>
+            <th> CNR</th>
+            <!-- <th>Name</th>
+            <th>City</th>
+            <th>Pincode</th>
+            <th>Contact</th>
+            <th>Ambulance type</th>
+            <th>Delete</th>
+            <th>Edit</th> -->
+        </tr>
+        </thead>
+        <tbody>
+        {% for case in case_details %}
+            <tr>
+                <td>
+                    {{ case.cnr }}
+                </td>
+                <!-- <td>
+                    {{ambulance.name}}
+                </td>
+                <td>
+                    {{ambulance.city}}
+                </td>
+                <td>
+                    {{ambulance.pincode}}
+                </td>
+                <td>
+                    {{ambulance.contact}}
+                </td>
+                <td>
+                    {{ambulance.amb_type}}
+                </td> -->
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+=======
 
 <div class="container">
   <div class="row">
@@ -73,3 +115,4 @@
 </div></div></div>
 
 {% endblock content%}
+>>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
