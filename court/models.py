@@ -43,17 +43,11 @@ class Advocate(models.Model):
     name=models.CharField(max_length=400)
     address=models.CharField(max_length=500)
     court_type=MultiSelectField(choices=Court_Type,max_length=20)
-<<<<<<< HEAD
-    #contact_number=models.BigIntegerField(null=True)
-=======
->>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
-<<<<<<< HEAD
-=======
 class Judge(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
     name=models.CharField(max_length=100)
@@ -61,7 +55,6 @@ class Judge(models.Model):
     district=models.CharField(max_length=100,blank=True,null=True)
     license_no = models.CharField(max_length=17, primary_key=True)
     
->>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 class Case(models.Model):
     advocate=models.ForeignKey(User,on_delete=models.CASCADE,related_name="advocate_user")
     name_of_applicant=models.CharField(max_length=400)
@@ -79,19 +72,9 @@ class Case(models.Model):
     name_of_respondent=models.CharField(max_length=400,null=True)
     lawyer_of_respondent=models.CharField(max_length=400,null=True)
     address_of_respondent=models.CharField(max_length=500, null=True)
-<<<<<<< HEAD
-=======
     judge=models.ForeignKey(Judge,on_delete=models.CASCADE,related_name="judge_user",null=True,blank=True)
->>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 
     def __str__(self):
         return self.cnr
-
-<<<<<<< HEAD
-    
-=======
-
-
->>>>>>> 80025140d39514c1cc78f16240f96bad1ab73e05
 
 # Create your models here.
